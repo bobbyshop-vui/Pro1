@@ -1,22 +1,23 @@
 import streamlit as st
-st.title(':collision: ĐIỀN THÔNG TIN GIỚI THIỆU BẢN THÂN')
-my_bar = st.progress(0)
-quiz = ["Họ và tên:", "Ngày sinh:", "Nơi sinh","Sở thích:"]
-answers = []
-len_quiz = len(quiz)
-for i in range(len_quiz):
-  tl = st.text_input(quiz[i])
-  if tl !="":
-    answers.append(tl)
+import time
 
-if st.button("Confirm"):
-  if len(answers)==len_quiz:
-    my_bar.progress(100)
-    st.write("Bạn đã điền đầy đủ thông tin")
-    st.balloons()
-  else:
-    my_bar.progress(len(answers)/len_quiz)
-    st.write("Bạn chưa điền đủ thông tin")
+# Thông tin đăng nhập
+USERNAME = "admin"
+PASSWORD = "123456"
+st.title("🔑 Đăng nhập")
+# Nhập tài khoản
+username = st.text_input("👤 Tên đăng nhập")
+password = st.text_input("🔒 Mật khẩu", type="password")
+# Hiển thị thanh tiến trình
+progress_bar = st.progress(0)
+if st.button("Đăng nhập"):
+    if username == USERNAME and password == PASSWORD:
+        st.success("✅ Đăng nhập thành công!")
+        st.balloons()  # Hiệu ứng bóng bay 🎈
+        for percent in range(101):
+            time.sleep(0.02)
+            progress_bar.progress(percent)
 
-for i in range (len(answers)):
-  st.write(quiz[i],answers[i])
+        st.write("🎉 Chào mừng bạn!")
+    else:
+        st.error("❌ Sai tài khoản hoặc mật khẩu!")
